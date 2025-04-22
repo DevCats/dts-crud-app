@@ -20,3 +20,14 @@ export const getTaskById = async(req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 }
+
+export const createTask = async(req, res) => {
+    try {
+        const taskData = req.body;
+        const newTask = await taskService.createTask(taskData);
+        res.status(200).json(newTask);
+    } catch (err) {
+        console.error("Unable to create task", err);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+}

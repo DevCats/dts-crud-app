@@ -9,3 +9,13 @@ export const getTaskById = async(_taskId) => {
     const { rows } = await query(`SELECT * FROM tasks_tb WHERE id=$1`, [_taskId]);
     return rows[0];
 }
+
+export const createTask = async(_taskData) => {
+    const { title, description, status, due } = _taskData;
+    const { rows } = await query(
+        `INSERT INTO tasks_tb (title, description, status, due)
+        VALUES ($1, $2, $3, $4) RETURNING *`,
+        [title, description, status, due]
+    );
+    return rows[0];
+}

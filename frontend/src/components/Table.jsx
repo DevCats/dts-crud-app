@@ -22,6 +22,14 @@ const Table = ({ tableData, setTableData }) => {
         }
     }
 
+    const handleUpdate = async(_id, _newStatus) => {
+        try {
+            await axios.put(`http://localhost:3000/api/tasks/${_id}`, { status: _newStatus });
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
     return (
         <>
             <div className="overflow-x-auto mt-10">
@@ -42,7 +50,7 @@ const Table = ({ tableData, setTableData }) => {
                                 <td>{ task.title }</td>
                                 <td>{ task.description }</td>
                                 <td>
-                                    <select className="select" defaultValue={ task.status }>
+                                    <select className="select" defaultValue={ task.status } onChange={ (e) => handleUpdate(task.id, e.currentTarget.value) }>
                                         <option>Not Started</option>
                                         <option>In Progress</option>
                                         <option>Stuck</option>

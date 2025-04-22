@@ -19,3 +19,11 @@ export const createTask = async(_taskData) => {
     );
     return rows[0];
 }
+
+export const updateTaskStatus = async(_taskId, _taskStatus) => {
+    const { rows } = await query(
+        `UPDATE tasks_tb SET status=$1 WHERE id=$2 RETURNING *`,
+        [_taskStatus, _taskId]
+    );
+    return rows[0];
+}

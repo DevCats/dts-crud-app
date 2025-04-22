@@ -31,3 +31,16 @@ export const createTask = async(req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 }
+
+export const updateTaskStatus = async(req, res) => {
+    try {
+        const taskId = req.params.id;
+        const taskStatus = req.body;
+        const updatedStatus = await taskService.updateTaskStatus(taskId, taskStatus);
+        if (!updatedStatus) { return res.status(404).json({ message: "Task not found" }); }
+        res.status(200).json(updatedStatus);
+    } catch (err) {
+        console.error("Unable to update task status", err);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+}

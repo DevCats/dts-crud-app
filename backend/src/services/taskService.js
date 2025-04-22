@@ -27,3 +27,8 @@ export const updateTaskStatus = async(_taskId, _taskStatus) => {
     );
     return rows[0];
 }
+
+export const deleteTask = async(_taskId) => {
+    const { rows } = await query(`DELETE FROM tasks_tb WHERE id=$1`, [_taskId]);
+    return rows > 0;
+}

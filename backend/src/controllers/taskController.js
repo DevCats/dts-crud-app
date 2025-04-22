@@ -44,3 +44,15 @@ export const updateTaskStatus = async(req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 }
+
+export const deleteTask = async(req, res) => {
+    try {
+        const taskId = req.params.id;
+        const deletedTask = await taskService.deleteTask(taskId);
+        if (!deletedTask) { return res.status(404).json({ message: "Task not found" }); }
+        res.status(200).json(deletedTask);
+    } catch (err) {
+        console.error("Unable to delete task", err);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+}

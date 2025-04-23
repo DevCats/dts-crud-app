@@ -1,4 +1,4 @@
-const Navbar = () => {
+const Navbar = ({ onOpen }) => {
     return (
         <>
             <div className="navbar bg-base-100">
@@ -9,7 +9,7 @@ const Navbar = () => {
                     <input type="text" placeholder="Search" className="input input-bordered w-48 md:w-auto" />
                 </div>
                 <div className="navbar-end">
-                    <a className="btn btn-primary">Create Task</a>
+                    <a className="btn btn-primary" onClick={ onOpen }>Create Task</a>
                 </div>
             </div>     
         </>

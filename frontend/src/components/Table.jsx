@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import axios from 'axios';
 
-const Table = ({ tableData, setTableData }) => {
+const Table = ({ tableData, setTableData, searchTerm }) => {
 
     // const tableData = [
     //     {id: 1, title: "Task #1", description: "Description for task #1", status: "Not Started", due: "2025-04-28 13:00:00+01"},
@@ -30,6 +29,13 @@ const Table = ({ tableData, setTableData }) => {
         }
     }
 
+    const filteredData = tableData.filter(task => 
+        task.id == searchTerm ||
+        task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        task.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        task.status.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
         <>
             <div className="overflow-x-auto mt-10">
@@ -44,11 +50,11 @@ const Table = ({ tableData, setTableData }) => {
                     </tr>
                     </thead>
                     <tbody>
-                        { tableData.map(task => (
+                        { filteredData.map(task => (
                             <tr className="hover:bg-base-300" key={`row-id-${task.id}`}>
                                 <th>{ task.id }</th>
                                 <td>{ task.title }</td>
-                                <td>{ task.description }</td>
+                                <td>{ task.description || '' }</td>
                                 <td>
                                     <select className="select" defaultValue={ task.status } onChange={ (e) => handleUpdate(task.id, e.currentTarget.value) }>
                                         <option>Not Started</option>

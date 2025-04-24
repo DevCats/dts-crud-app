@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const Modal = ({ isOpen, onClose, onSubmit }) => {
+const Modal = ({ isOpen, onClose, onCreate }) => {
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -11,7 +11,7 @@ const Modal = ({ isOpen, onClose, onSubmit }) => {
         e.preventDefault();
         try {
             const taskData = { title, description, status, due };
-            await onSubmit(taskData);
+            await onCreate(taskData);
             onClose();
         } catch (err) {
             console.error('Unable to create task', err.message);

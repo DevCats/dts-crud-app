@@ -10,10 +10,12 @@ const App = () => {
 
   const [tableData, setTableData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const fetchTasks = async() => {
     try {
       const response = await axios.get('http://localhost:3000/api/tasks');
+      response.data.sort((a, b) => a.id - b.id);
       setTableData(response.data);
     } catch (err) {
       console.error(err.message);
@@ -28,7 +30,7 @@ const App = () => {
     setIsOpen(true);
   }
 
-  const handleSubmit = async(_newTaskData) => {
+  const handleCreate = async(_newTaskData) => {
     try {
       const response = await axios.post('http://localhost:3000/api/tasks', _newTaskData);
       console.log('Client added: ', response.data);
@@ -42,14 +44,16 @@ const App = () => {
     <>
       <Navbar 
         onOpen={ () => handleOpen() }
+        onSearch={ setSearchTerm }
       />
       <Table 
         tableData={ tableData }
         setTableData={ setTableData }
+        searchTerm={ searchTerm }
       />
       <Modal 
         isOpen={ isOpen }
-        onSubmit={ handleSubmit }
+        onCreate={ handleCreate }
         onClose={ () => setIsOpen(false) }
       />
     </>

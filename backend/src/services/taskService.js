@@ -11,7 +11,7 @@ export const getTaskById = async(_taskId) => {
 }
 
 export const createTask = async(_taskData) => {
-    const { title, description, status, due } = _taskData;
+    const { title, description='', status, due } = _taskData;
     const { rows } = await query(
         `INSERT INTO tasks_tb (title, description, status, due)
         VALUES ($1, $2, $3, $4) RETURNING *`,
@@ -31,4 +31,9 @@ export const updateTaskStatus = async(_taskId, _taskStatus) => {
 export const deleteTask = async(_taskId) => {
     const { rowCount } = await query(`DELETE FROM tasks_tb WHERE id=$1 RETURNING *`, [_taskId]);
     return rowCount > 0;
+}
+
+export const searchTasks = async(_searchId) => {
+    const { rows } = await query(`SELECT * FROM tasks_tb WHERE id = $1`, [_searchId]);
+    return rows;
 }

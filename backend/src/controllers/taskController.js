@@ -56,3 +56,14 @@ export const deleteTask = async(req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 }
+
+export const searchTasks = async(req, res) => {
+    try {
+        const searchId = req.params.q;
+        const tasks = await taskService.searchTasks(searchId);
+        req.status(200).json(tasks);
+    } catch (err) {
+        console.error("Unable to find task", err);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+}

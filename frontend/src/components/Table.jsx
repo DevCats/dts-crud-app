@@ -36,6 +36,14 @@ const Table = ({ tableData, setTableData, searchTerm }) => {
         task.status.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+    const convertDate = (_timestamp) => {
+        const fullDate = new Date(_timestamp);
+        const date = fullDate.toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric" });
+        const time = fullDate.toLocaleTimeString("en-GB", { hour12: false, hour: "2-digit", minute: "2-digit" });
+        return `${date} @ ${time}`;
+
+    }
+
     return (
         <>
             <div className="overflow-x-auto mt-10">
@@ -63,7 +71,7 @@ const Table = ({ tableData, setTableData, searchTerm }) => {
                                         <option>Complete</option>
                                     </select>
                                 </td>
-                                <td>{ task.due }</td>
+                                <td>{ convertDate(task.due) }</td>
                                 <td>
                                     <button className="btn btn-secondary btn-sm btn-wide" onClick={ () => handleDelete(task.id) }>Delete</button>
                                 </td>

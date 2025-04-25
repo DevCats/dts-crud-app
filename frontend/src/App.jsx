@@ -16,6 +16,7 @@ const App = () => {
     fetchTasks();
   }, []);
 
+  // Fetches all tasks, orders them by ASC ID, and updates tableData state
   const fetchTasks = async() => {
     try {
       const response = await axios.get('http://localhost:3000/api/tasks');
@@ -26,6 +27,7 @@ const App = () => {
     }
   }
 
+  // Creates a task, and then updates the current tableData state
   const handleCreate = async(_newTaskData) => {
     try {
       const response = await axios.post('http://localhost:3000/api/tasks', _newTaskData);
@@ -43,6 +45,7 @@ const App = () => {
   return (
     <>
       <Navbar 
+      // Attaching handleOpen to onOpen prop so I don't have to pass in isOpen
         onOpen={ () => handleOpen() }
         onSearch={ setSearchTerm }
       />
@@ -54,6 +57,8 @@ const App = () => {
       <Modal 
         isOpen={ isOpen }
         onCreate={ handleCreate }
+        // e was passed to prevent the form attempting to submit on close
+        // Unsure why this was the case - something to do with event bubbling/propagation?
         onClose={ (e) => {
           e.preventDefault(); 
           setIsOpen(false) 

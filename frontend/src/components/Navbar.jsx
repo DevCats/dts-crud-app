@@ -1,5 +1,6 @@
 const Navbar = ({ onOpen, onSearch }) => {
 
+    // Updates state of searchTerm via the onSearch prop
     const handleSearch = (e) => {
         onSearch(e.target.value);
     }

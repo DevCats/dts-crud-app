@@ -7,6 +7,7 @@ const Modal = ({ isOpen, onClose, onCreate }) => {
     const [status, setStatus] = useState('');
     const [due, setDue] = useState('');
 
+    // Called when modal form is submitted, calls onCreate then resets current state values for title/description/status/due
     const handleSubmit = async(e) => {
         e.preventDefault();
         try {

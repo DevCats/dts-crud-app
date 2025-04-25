@@ -5,6 +5,8 @@ const Table = ({ tableData, setTableData, searchTerm }) => {
 
     const [error, setError] = useState(null);
 
+    // Filters current value of tableData based on whether data contains the current value of searchTerm prop
+    // Extend proposed functionality of being able to search by ID b/c search by title/description/status seemed more likely
     const filteredData = tableData.filter(task => 
         task.id == searchTerm ||
         task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -12,6 +14,8 @@ const Table = ({ tableData, setTableData, searchTerm }) => {
         task.status.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+    // Converts the timestamp returned into a more human-readable format
+    // Only considering "en-GB" locale because original spec was for HMCTS & assumed overseas work would likely not be allowed
     const convertDate = (_timestamp) => {
         const fullDate = new Date(_timestamp);
         const date = fullDate.toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric" });
@@ -20,6 +24,7 @@ const Table = ({ tableData, setTableData, searchTerm }) => {
 
     }
 
+    // Deletes a task, and then updates the current tableData state
     const handleDelete = async(_id) => {
         const confirmDelete = window.confirm("Are you sure you would like to delete this task?");
         if (confirmDelete) {
@@ -32,6 +37,8 @@ const Table = ({ tableData, setTableData, searchTerm }) => {
         }
     }
 
+    // Updates status of a task
+    // No state changes as <select> change does not necessitate re-rendering
     const handleUpdate = async(_id, _newStatus) => {
         try {
             await axios.put(`http://localhost:3000/api/tasks/${_id}`, { status: _newStatus });

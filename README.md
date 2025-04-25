@@ -22,13 +22,15 @@ Built using Vite, React, Tailwind CSS, daisyUI & Axios on the client-side, and P
 5. Go through the steps to create a local PostgresSQL server.
     * Make a note of the username, hostname, password, and port.
 6. Copy the statement below & paste it into a new query tab, then execute it to create the table. 
-    * "CREATE TABLE IF NOT EXISTS tasks_tb (
+    * ``` SQL 
+    CREATE TABLE IF NOT EXISTS tasks_tb (
         id SERIAL PRIMARY KEY,
         title VARCHAR(128) NOT NULL,
         description TEXT,
         status VARCHAR(16) NOT NULL,
         due TIMESTAMPTZ NOT NULL,
-    );"
+    );
+    ```
 7. Navigate back to the /backend directory & create a ".env" file.
 8. Add the credentials from step 5, the format is detailed below.
     * PG_USER = <username>,

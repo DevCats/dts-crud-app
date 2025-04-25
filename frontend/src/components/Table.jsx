@@ -1,33 +1,9 @@
 import axios from 'axios';
+import { useState } from 'react';
 
 const Table = ({ tableData, setTableData, searchTerm }) => {
 
-    // const tableData = [
-    //     {id: 1, title: "Task #1", description: "Description for task #1", status: "Not Started", due: "2025-04-28 13:00:00+01"},
-    //     {id: 2, title: "Task #2", description: "Description for task #2", status: "In Progress", due: "2025-05-05 10:00:00+01"},
-    //     {id: 3, title: "Task #3", description: "Description for task #3", status: "Stuck", due: "2025-05-12 17:00:00+01"},
-    //     {id: 4, title: "Task #4", description: "Description for task #4", status: "Complete", due: "2025-05-19 12:30:00+01"},
-    // ];
-
-    const handleDelete = async(_id) => {
-        const confirmDelete = window.confirm("Are you sure you would like to delete this task?");
-        if (confirmDelete) {
-            try{
-                await axios.delete(`http://localhost:3000/api/tasks/${_id}`);
-                setTableData((prevData) => prevData.filter(task => task.id !== _id));
-            } catch (err) {
-                console.error(err.message);
-            }
-        }
-    }
-
-    const handleUpdate = async(_id, _newStatus) => {
-        try {
-            await axios.put(`http://localhost:3000/api/tasks/${_id}`, { status: _newStatus });
-        } catch (err) {
-            console.error(err.message);
-        }
-    }
+    const [error, setError] = useState(null);
 
     const filteredData = tableData.filter(task => 
         task.id == searchTerm ||
@@ -44,8 +20,30 @@ const Table = ({ tableData, setTableData, searchTerm }) => {
 
     }
 
+    const handleDelete = async(_id) => {
+        const confirmDelete = window.confirm("Are you sure you would like to delete this task?");
+        if (confirmDelete) {
+            try{
+                await axios.delete(`http://localhost:3000/api/tasks/${_id}`);
+                setTableData((prevData) => prevData.filter(task => task.id !== _id));
+            } catch (err) {
+                setError(err.message);
+            }
+        }
+    }
+
+    const handleUpdate = async(_id, _newStatus) => {
+        try {
+            await axios.put(`http://localhost:3000/api/tasks/${_id}`, { status: _newStatus });
+        } catch (err) {
+            setError(err.message);
+        }
+    }
+
     return (
         <>
+            {error && <div className="alert alert-error">{error}</div>}
+
             <div className="overflow-x-auto mt-10">
                 <table className="table">
                     <thead>

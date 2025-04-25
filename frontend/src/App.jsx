@@ -12,6 +12,10 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
   const fetchTasks = async() => {
     try {
       const response = await axios.get('http://localhost:3000/api/tasks');
@@ -22,14 +26,6 @@ const App = () => {
     }
   }
 
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
-  const handleOpen = () => {
-    setIsOpen(true);
-  }
-
   const handleCreate = async(_newTaskData) => {
     try {
       const response = await axios.post('http://localhost:3000/api/tasks', _newTaskData);
@@ -38,6 +34,10 @@ const App = () => {
     } catch (err) {
       console.error('Error adding task', err.message);
     }
+  }
+
+  const handleOpen = () => {
+    setIsOpen(true);
   }
 
   return (

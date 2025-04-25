@@ -62,6 +62,5 @@ The API has 5 endpoints:
 * DELETE /tasks/:id
     * Deletes the task corresponding with the ID passed into the URL
 
-### License ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)(https://opensource.org/licenses/MIT) 
-Project created using the MIT license.
-[Learn more...](https://opensource.org/licenses/MIT)
+### License ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) 
+Project created using the [MIT License](https://opensource.org/licenses/MIT)

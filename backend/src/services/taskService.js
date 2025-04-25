@@ -32,8 +32,3 @@ export const deleteTask = async(_taskId) => {
     const { rowCount } = await query(`DELETE FROM tasks_tb WHERE id=$1 RETURNING *`, [_taskId]);
     return rowCount > 0;
 }
-
-export const searchTasks = async(_searchId) => {
-    const { rows } = await query(`SELECT * FROM tasks_tb WHERE id = $1`, [_searchId]);
-    return rows;
-}

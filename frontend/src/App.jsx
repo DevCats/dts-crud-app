@@ -54,7 +54,10 @@ const App = () => {
       <Modal 
         isOpen={ isOpen }
         onCreate={ handleCreate }
-        onClose={ () => setIsOpen(false) }
+        onClose={ (e) => {
+          e.preventDefault(); 
+          setIsOpen(false) 
+        }}
       />
     </>
   )

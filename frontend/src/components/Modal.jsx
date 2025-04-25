@@ -16,7 +16,7 @@ const Modal = ({ isOpen, onClose, onCreate }) => {
             setDescription('');
             setStatus('');
             setDue('');
-            onClose();
+            onClose(e);
         } catch (err) {
             console.error('Unable to create task', err.message);
         }

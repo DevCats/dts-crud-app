@@ -33,11 +33,13 @@ Built using Vite, React, Tailwind CSS, daisyUI & Axios on the client-side, and P
     ```
 7. Navigate back to the /backend directory & create a ".env" file.
 8. Add the credentials from step 5, the format is detailed below.
-    * PG_USER = <username>,
-      PG_HOST = <host>,
-      PG_NAME = <tablename>,
-      PG_PASS = <password>,
-      PG_PORT = <port>,
+    ```
+    PG_USER = <username>,
+    PG_HOST = <host>,
+    PG_NAME = <tablename>,
+    PG_PASS = <password>,
+    PG_PORT = <port>,
+    ```
 9. Ensure your PostgresSQL server is running.
 10. Navigate to the /frontend directory in one terminal & the /backend directory in another. 
 11. In both terminals run "npm run dev".

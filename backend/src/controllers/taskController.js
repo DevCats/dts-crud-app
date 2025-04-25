@@ -14,7 +14,7 @@ export const getTaskById = async(req, res) => {
     try {
         const taskId = req.params.id;
         const task = await taskService.getTaskById(taskId);
-        res.status(200).json(task);
+        if (!task) { return res.status(404).json({ message: "Task not found" }); }
     } catch (err) {
         console.error("Unable to fetch task", err);
         res.status(500).json({ message: "Internal Server Error" });

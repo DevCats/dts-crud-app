@@ -5,7 +5,11 @@ import taskRoutes from "./routes/taskRoute.js";
 const app = express();
 const port = 3000;
 
-app.use(cors());
+app.use(cors({
+    origin: [""],
+    methods: ["POST", "PUT", "GET", "DELETE"],
+    credentials: true
+}));
 app.use(express.json());
 
 app.use("/api", taskRoutes);

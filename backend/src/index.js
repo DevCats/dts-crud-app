@@ -6,7 +6,7 @@ const app = express();
 const port = 3000;
 
 app.use(cors({
-    origin: "https://dts-crud-app-backend.vercel.app/",
+    origin: "https://dts-crud-app-backend.vercel.app",
     methods: "POST,PUT,GET,DELETE",
     allowedHeaders: ["Content-Type"], 
     credentials: true

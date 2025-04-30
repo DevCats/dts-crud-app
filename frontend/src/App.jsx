@@ -19,7 +19,7 @@ const App = () => {
   // Fetches all tasks, orders them by ASC ID, and updates tableData state
   const fetchTasks = async() => {
     try {
-      const response = await axios.get('http://localhost:3000/api/tasks');
+      const response = await axios.get('https://dts-crud-app-backend.vercel.app/api/tasks');
       response.data.sort((a, b) => a.id - b.id);
       setTableData(response.data);
     } catch (err) {
@@ -30,7 +30,7 @@ const App = () => {
   // Creates a task, and then updates the current tableData state
   const handleCreate = async(_newTaskData) => {
     try {
-      const response = await axios.post('http://localhost:3000/api/tasks', _newTaskData);
+      const response = await axios.post('https://dts-crud-app-backend.vercel.app/api/tasks', _newTaskData);
       console.log('Client added: ', response.data);
       setTableData((prevData) => [...prevData, response.data]);
     } catch (err) {

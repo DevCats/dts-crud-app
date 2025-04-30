@@ -29,7 +29,7 @@ const Table = ({ tableData, setTableData, searchTerm }) => {
         const confirmDelete = window.confirm("Are you sure you would like to delete this task?");
         if (confirmDelete) {
             try{
-                await axios.delete(`http://localhost:3000/api/tasks/${_id}`);
+                await axios.delete(`https://dts-crud-app-backend.vercel.app/api/tasks/${_id}`);
                 setTableData((prevData) => prevData.filter(task => task.id !== _id));
             } catch (err) {
                 setError(err.message);
@@ -41,7 +41,7 @@ const Table = ({ tableData, setTableData, searchTerm }) => {
     // No state changes as <select> change does not necessitate re-rendering
     const handleUpdate = async(_id, _newStatus) => {
         try {
-            await axios.put(`http://localhost:3000/api/tasks/${_id}`, { status: _newStatus });
+            await axios.put(`https://dts-crud-app-backend.vercel.app/api/tasks/${_id}`, { status: _newStatus });
         } catch (err) {
             setError(err.message);
         }
